@@ -17,5 +17,5 @@ if [ -e "$lxdNET" ];
     echo "lxd Network Found"
   else
     echo "lxd network not found! Intialzing lxdbr0 Network Link"
-    #"$(lxd init --auto)" && echo "lxdbr0 Network Initialized" # Create the network and let user Know if created
+    $(lxd init --auto) && echo "lxdbr0 Network Initialized" # Create the network and let user Know if created
   fi
