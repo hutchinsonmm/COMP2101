@@ -2,11 +2,11 @@
 # Bash Lab 3
 # Auto creation of server container
 
-file="/var/snap/lxd"
+file="/var/snap/lxd" #Cheak if the lxd file is installed and if not install it
 if [ -e "$file" ];
   then
     echo "lxd file installed"
   else
     echo "lxd file not installed. Downloading File"
-    
+    "$(sudo snap install lxd)" && echo "File successful Installed"
   fi
