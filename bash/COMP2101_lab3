@@ -11,7 +11,7 @@ if [ -e "$lxdFile" ];
     "$(sudo snap install lxd)" && echo "File Successful Installed" #Installs the file and let's user know if it was successful.
   fi
 
-lxdNET="ip a | grep -q lxdbr0" #Checks if the networks exist, if not intialize the network interface
+lxdNET="/sys/class/net/lxdbr0" #Checks if the networks exist, if not intialize the network interface
 if [ -e "$lxdNET" ]; #Fix with the write option for test
   then
     echo "lxd Network Found" #let's user know if it already Exists
