@@ -8,7 +8,7 @@ if [ -e "$lxdFile" ];
     echo "lxd File Installed" #let user know if it already installed
   else
     echo "lxd File Not Installed. Installing lxd Program" #let user know if it's not installed.
-    "$(sudo snap install lxd)" && echo "File Successful Installed" #Installs the file and let's user know if it was successful.
+    "$(sudo --sh snap install lxd)" && echo "File Successful Installed" #Installs the file and let's user know if it was successful.
   fi
 
 lxdNET="/sys/class/net/lxdbr0" #Checks if the networks exist, if not intialize the network interface
@@ -28,3 +28,12 @@ if [ -e "$lxdCONT" ];
     echo "COMP2101-S22 Doesn't Exists" #lest user know if container dosen't exists
     $(lxc launch images:ubuntu/22.04 COMP2101-S22) && echo "COMP2101-S22 Created" #Creates lxd container and let's user know if it was successful
 fi
+
+ipTEST="/etc/hosts | grep -q 10.212.3.215"
+if [ -e "ipTEST" ];
+  then
+    echo "COMP2101-S22 is associated with ip address in hosts file"
+  else
+    echo "COMP2101-S22 is not associated with ip address in hosts file"
+    $(sudo -- sh -c -e "echo '10.212.3.215	COMP2101-S22' >> /etc/hosts" ) && echo "Association was successful"
+  fi
