@@ -2,11 +2,20 @@
 # Bash Lab 3
 # Auto creation of server container
 
-file="/var/snap/lxd" #Cheak if the lxd file is installed and if not install it
-if [ -e "$file" ];
+lxdFile="/var/snap/lxd" #Cheak if the lxd file is installed and if not install it
+if [ -e "$lxdFile" ];
   then
-    echo "lxd file installed"
+    echo "lxd File Installed"
   else
-    echo "lxd file not installed. Downloading File"
-    "$(sudo snap install lxd)" && echo "File successful Installed"
+    echo "lxd File Not Installed. Installing lxd Program"
+    "$(sudo snap install lxd)" && echo "File Successful Installed"
+  fi
+
+lxdNET="ip a | grep -q lxdbr0"
+if [ -e "$lxdNET" ];
+  then
+    echo "lxd Network Found"
+  else
+    echo "lxd network not found! Intialzing lxdbr0 Network Link"
+    #"$(lxd init --auto)" && echo "lxdbr0 Network Initialized" # Create the network and let user Know if created
   fi
