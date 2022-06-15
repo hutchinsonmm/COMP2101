@@ -2,20 +2,29 @@
 # Bash Lab 3
 # Auto creation of server container
 
-lxdFile="/var/snap/lxd" #Cheak if the lxd file is installed and if not install it
+lxdFile="/var/snap/lxd" #Checks if the lxd file is installed and if not install it
 if [ -e "$lxdFile" ];
   then
-    echo "lxd File Installed"
+    echo "lxd File Installed" #let user know if it already installed
   else
-    echo "lxd File Not Installed. Installing lxd Program"
-    "$(sudo snap install lxd)" && echo "File Successful Installed"
+    echo "lxd File Not Installed. Installing lxd Program" #let user know if it's not installed.
+    $(sudo snap install lxd) && echo "File Successful Installed" #Installs the file and let's user know if it was successful.
   fi
 
-lxdNET="ip a | grep -q lxdbr0"
-if [ -e "$lxdNET" ];
+lxdNET="ip a | grep -q lxdbr0" #Checks if the networks exist, if not intialize the network interface
+if [ -e "$lxdNET" ]; #Fix with the write option for test
   then
-    echo "lxd Network Found"
+    echo "lxd Network Found" #let's user know if it already Exists
   else
-    echo "lxd network not found! Intialzing lxdbr0 Network Link"
+    echo "lxd network not found! Intialzing lxdbr0 Network Link" #let's know there is no network interface
     $(lxd init --auto) && echo "lxdbr0 Network Initialized" # Create the network and let user Know if created
   fi
+
+lxdCONT="/var/snap/lxd/common/lxd/storage-pools/default/containers/COMP2101-S22" #Checks if the lxd containers is there 
+if [ -e "$lxdCONT" ];
+  then
+    echo "COMP2101-S22 Server Exists" #lets user know if container exists
+  else
+    echo "COMP2101-S22 Doesn't Exists" #lest user know if container dosen't exists
+    $(lxc launch images:ubuntu/22.04 COMP2101-S22)  && echo "COMP2101-S22 Created" #Creates lxd container and let's user know if it was successful
+fi
