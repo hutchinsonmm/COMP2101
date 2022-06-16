@@ -27,7 +27,7 @@ if [ -e "$lxdCONT" ];
   else
     echo "COMP2101-S22 Doesn't Exists" #lest user know if container dosen't exists
     $(lxc launch images:ubuntu/22.04 COMP2101-S22) && echo "COMP2101-S22 Created" #Creates lxd container and let's user know if it was successful
-    $(sudo -- sh -c -e "echo '10.200.223.148,COMP2101-S22' >> /var/snap/lxd/common/lxd/networks/lxdbr0/dnsmasq.hosts")
+    $(sudo -- sh -c -e "echo '10.200.223.148,COMP2101-S22' >> /var/snap/lxd/common/lxd/networks/lxdbr0/dnsmasq.hosts/COMP2101-S22.eth0")
 fi
 
 ipTEST="/etc/hosts | grep -q COMP2101-S22"
@@ -36,6 +36,6 @@ if [ -e "ipTEST" ];
     echo "COMP2101-S22 is associated with ip address in hosts file"
   else
     echo "COMP2101-S22 is not associated with ip address in hosts file"
-    $(sudo -- sh -c -e "echo '10.212.3.215	COMP2101-S22' >> /etc/hosts" ) && echo "Association was successful"
+    $(sudo -- sh -c -e "echo '10.200.223.148	COMP2101-S22' >> /etc/hosts" ) && echo "Association was successful"
   fi
 
