@@ -27,15 +27,15 @@ if [ -e "$lxdCONT" ];
   else
     echo "COMP2101-S22 Doesn't Exists" #lest user know if container dosen't exists
     $(lxc launch images:ubuntu/22.04 COMP2101-S22) && echo "COMP2101-S22 Created" #Creates lxd container and let's user know if it was successful
-    $(sudo -- sh -c -e "echo '10.200.223.148,COMP2101-S22' >> /var/snap/lxd/common/lxd/networks/lxdbr0/dnsmasq.hosts/COMP2101-S22.eth0")
+    $(sudo -- sh -c -e "echo '10.200.223.148,COMP2101-S22' >> /var/snap/lxd/common/lxd/networks/lxdbr0/dnsmasq.hosts/COMP2101-S22.eth0") # to force a static ip to use for this container
 fi
 
-ipTEST="/etc/hosts | grep -q COMP2101-S22"
+ipTEST="/etc/hosts | grep -q COMP2101-S22" #To test if the COMP2101-S22 ip is in th hosts files
 if [ -e "ipTEST" ];
   then
-    echo "COMP2101-S22 is associated with ip address in hosts file"
+    echo "COMP2101-S22 is associated with ip address in hosts file" #To let user know that it is already in the file
   else
     echo "COMP2101-S22 is not associated with ip address in hosts file"
-    $(sudo -- sh -c -e "echo '10.200.223.148	COMP2101-S22' >> /etc/hosts" ) && echo "Association was successful"
+    $(sudo -- sh -c -e "echo '10.200.223.148		COMP2101-S22' >> /etc/hosts" ) && echo "Association was successful" # To have the associated ip address is in the host files
   fi
 
