@@ -73,7 +73,7 @@ EOF
 
 # define the interface being summarized
 interfaces=$(ifconfig | grep -o -w '^[^ ][^ ]*:' | grep -wv "lo" | tr -d :)
-for interface in $interfaces; do
+for interface in $interfaces; do #To have it run through all the interfaces and display them.
 
 [ "$verbose" = "yes" ] && echo "Reporting on interface(s): $interface"
 
