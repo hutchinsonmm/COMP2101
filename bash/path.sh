@@ -1,0 +1,2 @@
+PATH=$PATH:~/COMP2101/bash
+echo $PATH
